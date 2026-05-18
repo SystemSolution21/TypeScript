@@ -4,6 +4,13 @@ function logMessage(message: string): void {
 }
 logMessage('This is a log message from a void function which do not return anything.');
 
+// Default parameter
+function pow(base: number, exponent: number = 2): number {
+    return Math.pow(base, exponent);
+}
+console.log(pow(3));
+console.log(pow(3, 3));
+
 // Rest(...) parameter
 function sum(...numbers: number[]): number {
     return numbers.reduce((total, num) => total + num, 0);

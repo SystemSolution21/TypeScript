@@ -2,7 +2,7 @@
 // Enum numeric
 enum StatusCodes {
     Success = 200,
-    Accepted = 202,
+    Accepted = "202",
     NoContent = 204,
     Unauthorized = 401,
     BadRequest = 400,

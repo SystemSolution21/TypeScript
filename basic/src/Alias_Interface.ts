@@ -13,8 +13,8 @@ interface Triangle {
     height: number;
 };
 
-// type Shape = Circle | Square | Triangle;
-type Shape = Circle | Square;
+// type Shape = Circle | Square | Triangle; // Union |(OR)
+type Shape = Circle | Square; // Union |(OR)
 function getArea(shape: Shape): number {
     switch (shape.kind) {
         case 'square':
