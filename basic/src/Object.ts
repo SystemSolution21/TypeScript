@@ -23,9 +23,15 @@ console.log(person2);
 // Object create using type
 type Circle = {
     radius: number;
+    getArea: () => number;
 };
 
 const circle: Circle = {
     radius: 5,
+    getArea: function () {
+        let area: number = Math.PI * this.radius ** 2;
+        return Number(area.toFixed(2));
+    }
 };
-console.log(circle.radius);
+console.log("Radius of the circle:", circle.radius);
+console.log("Area of the circle:", circle.getArea());
