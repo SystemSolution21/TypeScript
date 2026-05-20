@@ -18,9 +18,9 @@ type Shape = Circle | Square; // Union |(OR)
 function getArea(shape: Shape): number {
     switch (shape.kind) {
         case 'square':
-            return shape.length * shape.length;
+            return shape.length ** 2;
         case 'circle':
-            return Math.PI * shape.radius * shape.radius;
+            return Math.PI * shape.radius ** 2;
         // case 'triangle':
         //     return 0.5 * shape.base * shape.height;
         default:
