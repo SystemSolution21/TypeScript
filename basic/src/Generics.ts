@@ -43,6 +43,16 @@ console.log(wrappedValue);
 let wrappedString: Wrapped<string> = { value: 'Hello' };
 console.log(wrappedString);
 
+// Generic Template Literal Type
+type Color = "red" | "green" | "blue";
+type HexColor<T extends Color> = `#${string}`;
+let red: HexColor<"red"> = "#ff0000";
+let green: HexColor<"green"> = "#00ff00";
+let blue: HexColor<"blue"> = "#0000ff";
+console.log(`red: ${red}`);
+console.log(`green: ${green}`);
+console.log(`blue: ${blue}`);
+
 // Constraint is add to Generic with keyword `extends`
 function createLoggedPair<S extends string | number, T extends string | number>(value1: S, value2: T): [S, T] {
     console.log(`Creating pair: ${value1}, ${value2}`);

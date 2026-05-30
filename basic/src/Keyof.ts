@@ -24,3 +24,12 @@ function createStringPair(property: keyof StringMap, value: string): StringMap {
 console.log(JSON.stringify(createStringPair('name', 'Alice')));
 console.log(JSON.stringify(createStringPair('age', '30')));
 console.log(JSON.stringify(createStringPair('city', 'New York')));
+
+// Index Signature Labels
+type DynamicObject = { [key: `dynamic_${string}`]: string };
+let dynamicKeys: DynamicObject = {
+    dynamic_key1: 'value1',
+    dynamic_key2: 'value2',
+    dynamic_key3: 'value3'
+};
+console.log(dynamicKeys);
