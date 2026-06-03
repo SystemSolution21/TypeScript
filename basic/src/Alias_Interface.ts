@@ -12,26 +12,33 @@ interface Triangle {
     base: number;
     height: number;
 };
+interface Rectangle {
+    kind: 'rectangle';
+    width: number;
+    height: number;
+};
 
-// type Shape = Circle | Square | Triangle; // Union |(OR)
-type Shape = Circle | Square; // Union |(OR)
+type Shape = Circle | Square | Triangle; // Union |(OR)
+// type Shape = Circle | Square | Triangle | Rectangle; // Union |(OR)
 function getArea(shape: Shape): number {
     switch (shape.kind) {
         case 'square':
             return shape.length ** 2;
         case 'circle':
             return Math.PI * shape.radius ** 2;
-        // case 'triangle':
-        //     return 0.5 * shape.base * shape.height;
+        case 'triangle':
+            return 0.5 * shape.base * shape.height;
         default:
-            // Exhaustiveness checking
+            // 1. Catches it during development (TypeScript)
             const _exhaustiveCheck: never = shape;
-            return _exhaustiveCheck;
+
+            // 2. Catches it during runtime (JavaScript)
+            throw new Error(`Unhandled shape kind: ${(_exhaustiveCheck as any).kind}`);
     }
 }
 console.log(getArea({ kind: 'square', length: 5 }));
 console.log(getArea({ kind: 'circle', radius: 3 }));
-// console.log(getArea({ kind: 'triangle', base: 4, height: 6 }));
+console.log(getArea({ kind: 'triangle', base: 4, height: 6 }));
 
 // Optional property in interface
 interface Person {
@@ -48,8 +55,9 @@ interface User {
     id: number;
     role: string;
     name: string;
+    // Optional property
     address: {
-        street?: string; // Optional property
+        street?: string;
         city?: string;
         state?: string;
         zip?: number;
