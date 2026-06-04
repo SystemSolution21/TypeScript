@@ -73,7 +73,7 @@ async function ValidateDatabaseConnection(dburi: string): Promise<boolean> {
 }
 
 // User Registration
-async function registerUser(user: User, dburi: string) {
+async function registerUser(user: User, dburi: string): Promise<void> {
     try {
         // Validate User
         validateUser(user);
@@ -95,7 +95,7 @@ async function registerUser(user: User, dburi: string) {
 }
 
 // Usage
-async function runUserRegistration() {
+async function runUserRegistration(): Promise<void> {
     await registerUser({ name: "John Doe", email: "john.doe@example.com" }, 'mongodb://localhost:27017');
     await registerUser({ name: "", email: "john.doe@example.com" }, 'mongodb://localhost:27017');
     await registerUser({ name: "John Doe", email: "john.doeexample.com" }, 'mongodb://localhost:27017');
@@ -104,3 +104,29 @@ async function runUserRegistration() {
 
 }
 runUserRegistration();
+
+// Type Guards
+function isString(value: unknown): value is string {
+    return typeof value === 'string';
+}
+function isNumber(value: unknown): value is number {
+    return typeof value === 'number';
+}
+function isBoolean(value: unknown): value is boolean {
+    return typeof value === 'boolean';
+}
+function processValue(value: unknown) {
+    if (isString(value)) {
+        return value.toUpperCase();
+    } else if (isNumber(value)) {
+        return value.toFixed(2);
+    } else if (isBoolean(value)) {
+        return !value;
+    } else {
+        return 'Unknown type';
+    }
+}
+console.log(processValue('Hello'));
+console.log(processValue(42));
+console.log(processValue(true));
+console.log(processValue(null));
