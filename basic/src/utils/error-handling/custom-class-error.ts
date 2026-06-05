@@ -1,23 +1,5 @@
-// try/catch
-function divide(a: number, b: number): number {
-    if (b === 0) {
-        throw new Error('Division by zero is not allowed.');
-    }
-    return a / b;
-}
-try {
-    let result = divide(10, 0);
-    // let result = divide(10, 2);
-    console.log('Result:', result);
-} catch (error) {
-    if (error instanceof Error) {
-        console.error('Error:', error.message);
-    } else {
-        console.error('An unexpected error occurred:', error);
-    }
-}
-
 // Error Custom Class
+
 // Define Validation Error
 class ValidationError extends Error {
     field?: string | undefined;
@@ -83,7 +65,7 @@ async function registerUser(user: User, dburi: string): Promise<void> {
         console.log(`Database connection is valid`);
         console.log(`User is registered: ${user.name}, ${user.email}`);
         // Register User
-    } catch (error) {
+    } catch (error: unknown) {
         if (error instanceof ValidationError) {
             console.error(`Validation Error [Field: ${error.field}]: ${error.message}`);
         } else if (error instanceof DatabaseError) {
@@ -123,6 +105,8 @@ function userValidation(user: User) {
     } catch (error: unknown) {
         if (isValidationError(error)) {
             console.error(`Validation Error [Field: ${error.field}]: ${error.message}`);
+        } else if (isDatabaseError(error)) {
+            console.error(`Database Error [Code: ${error.code}]: ${error.message}`);
         } else if (isErrorWithMessage(error)) {
             console.error(`An error occurred: ${error.message}`);
         } else {
@@ -137,28 +121,3 @@ userValidation({ name: "", email: "" });
 userRegistration();
 
 
-// Primitives Type Guards
-function isString(value: unknown): value is string {
-    return typeof value === 'string';
-}
-function isNumber(value: unknown): value is number {
-    return typeof value === 'number';
-}
-function isBoolean(value: unknown): value is boolean {
-    return typeof value === 'boolean';
-}
-function processValue(value: unknown) {
-    if (isString(value)) {
-        return value.toUpperCase();
-    } else if (isNumber(value)) {
-        return value.toFixed(2);
-    } else if (isBoolean(value)) {
-        return !value;
-    } else {
-        return 'Unknown type';
-    }
-}
-console.log(processValue('Hello'));
-console.log(processValue(42));
-console.log(processValue(true));
-console.log(processValue(null));
