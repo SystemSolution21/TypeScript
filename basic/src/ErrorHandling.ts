@@ -94,8 +94,7 @@ async function registerUser(user: User, dburi: string): Promise<void> {
     }
 }
 
-// Usage
-async function runUserRegistration(): Promise<void> {
+async function userRegistration(): Promise<void> {
     await registerUser({ name: "John Doe", email: "john.doe@example.com" }, 'mongodb://localhost:27017');
     await registerUser({ name: "", email: "john.doe@example.com" }, 'mongodb://localhost:27017');
     await registerUser({ name: "John Doe", email: "john.doeexample.com" }, 'mongodb://localhost:27017');
@@ -103,9 +102,42 @@ async function runUserRegistration(): Promise<void> {
     await registerUser({ name: "John Doe", email: "john.doe@example.com" }, 'postgresql://localhost:5432');
 
 }
-runUserRegistration();
 
-// Type Guards
+// Type Guards for Error
+function isValidationError(error: unknown): error is ValidationError {
+    return error instanceof ValidationError;
+}
+function isDatabaseError(error: unknown): error is DatabaseError {
+    return error instanceof DatabaseError;
+}
+function isErrorWithMessage(error: unknown): error is { message: string } {
+    return typeof error === 'object' &&
+        error !== null &&
+        'message' in error &&
+        typeof (error as { message: string }).message === 'string';
+}
+
+function userValidation(user: User) {
+    try {
+        validateUser(user);
+    } catch (error: unknown) {
+        if (isValidationError(error)) {
+            console.error(`Validation Error [Field: ${error.field}]: ${error.message}`);
+        } else if (isErrorWithMessage(error)) {
+            console.error(`An error occurred: ${error.message}`);
+        } else {
+            console.error(`An unexpected error occurred: ${error}`);
+        }
+
+    }
+}
+
+// Usage
+userValidation({ name: "", email: "" });
+userRegistration();
+
+
+// Primitives Type Guards
 function isString(value: unknown): value is string {
     return typeof value === 'string';
 }
