@@ -1,10 +1,14 @@
-// Type Assertion Error Handling
-function assertIsError(error: unknown): asserts error is Error {
-    if (!(error instanceof Error)) {
-        throw new Error('Not an error');
-    }
-}
+/**
+ * Type assertion error handling example
+ * Demonstrates using type assertion functions for error narrowing
+ */
 
+import { logger } from '../logger.js';
+import { assertIsError } from '../error-guards.js';
+
+/**
+ * Divides two numbers
+ */
 function divide(a: number, b: number): number {
     if (b === 0) {
         throw new Error('Division by zero is not allowed.');
@@ -12,11 +16,19 @@ function divide(a: number, b: number): number {
     return a / b;
 }
 
-try {
-    let resultA = divide(10, 0);
-    console.log('Result:', resultA);
-} catch (error: unknown) {
-    assertIsError(error);
-    // From this point onwards, 'error' is typed as 'Error'
-    console.error('Error:', error.message);
+/**
+ * Example: Using assertion functions to narrow error types
+ */
+function typeAssertionExample(): void {
+    logger.info('=== Type Assertion Error Handling Example ===');
+
+    try {
+        const result = divide(10, 0);
+        logger.info(`Result: ${result}`);
+    } catch (error) {
+        assertIsError(error);
+        logger.error(`Division error: ${error.message}`);
+    }
 }
+
+typeAssertionExample();
