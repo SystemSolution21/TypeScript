@@ -3,7 +3,7 @@
  * Demonstrates simple try/catch pattern for synchronous operations
  */
 
-import { logger } from '../logger.js';
+import { logger } from '../utils/logger.js';
 
 /**
  * Divides two numbers

@@ -3,10 +3,10 @@
  * Demonstrates using type guards to safely narrow error types and values
  */
 
-import { logger } from '../logger.js';
-import { isValidationError, isDatabaseError, isErrorWithMessage } from '../error-guards.js';
-import { validateUser } from '../../validators/user.validator.js';
-import type { User } from '../../types/user.js';
+import { logger } from '../utils/logger.js';
+import { isValidationError, isDatabaseError, isErrorWithMessage } from '../errors/error-guards.js';
+import { validateUser } from '../validators/user.validator.js';
+import type { User } from '../types/user.js';
 
 // ===== Primitive Type Guards =====
 

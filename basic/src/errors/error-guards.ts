@@ -3,7 +3,7 @@
  * @module utils/error-guards
  */
 
-import { ValidationError, DatabaseError, NetworkError, AppError } from '../errors/core.js';
+import { ValidationError, DatabaseError, NetworkError, AppError } from './core.js';
 
 /**
  * Type guard to check if value is a standard Error

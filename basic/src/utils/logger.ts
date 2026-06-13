@@ -3,6 +3,8 @@
  * @module utils/logger
  */
 
+import { getErrorMessage } from '../errors/error-guards.js';
+
 export enum LogLevel {
     Debug = 'DEBUG',
     Info = 'INFO',
@@ -50,9 +52,12 @@ export class Logger {
      * Log error message
      */
     error(message: string, error?: unknown): void {
-        const errorDetails = error instanceof Error ? error.message : String(error);
-        const fullMessage = errorDetails ? `${message} - ${errorDetails}` : message;
+        const fullMessage = error !== undefined ? `${message} - ${getErrorMessage(error)}` : message;
         console.error(this.formatMessage(LogLevel.Error, fullMessage));
+
+        if (error instanceof Error && error.stack) {
+            console.error(error.stack);
+        }
     }
 }
 

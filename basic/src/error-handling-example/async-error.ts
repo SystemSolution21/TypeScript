@@ -3,9 +3,9 @@
  * Demonstrates error handling in asynchronous operations (async/await and promises)
  */
 
-import { logger } from '../logger.js';
-import { getErrorMessage, isNetworkError } from '../error-guards.js';
-import type { User } from '../../types/user.js';
+import { logger } from '../utils/logger.js';
+import { getErrorMessage, isNetworkError } from '../errors/error-guards.js';
+import type { User } from '../types/user.js';
 
 /**
  * Fetches a user from the API using async/await
@@ -70,4 +70,3 @@ async function promiseChainExample(): Promise<void> {
 
 asyncAwaitExample();
 promiseChainExample();
-

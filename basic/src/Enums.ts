@@ -1,6 +1,6 @@
 
 // Enum numeric
-enum StatusCodes {
+export enum StatusCodes {
     Success = 200,
     Accepted = "202",
     NoContent = 204,
@@ -48,7 +48,7 @@ console.log(StatusCodes.BadRequest);
 console.log(StatusCodes.Accepted);
 
 // Enum strings
-enum CardinalDirection {
+export enum CardinalDirection {
     North = 'North',
     East = 'East',
     South = 'South',

@@ -3,8 +3,8 @@
  * Demonstrates using type assertion functions for error narrowing
  */
 
-import { logger } from '../logger.js';
-import { assertIsError } from '../error-guards.js';
+import { logger } from '../utils/logger.js';
+import { assertIsError } from '../errors/error-guards.js';
 
 /**
  * Divides two numbers
